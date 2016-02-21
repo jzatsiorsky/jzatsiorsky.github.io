@@ -1,0 +1,28 @@
+<!-- Displays user's games on home page-->
+<div class="header">
+  <h5 class="center">This Week's Games</h5>
+</div>
+<table class="table table-bordered fixedHeight noBottomMargin" ng-show="upcomingObj.games.length > 0">
+  <thead>
+    <th colspan="2">When</th>
+    <th>Sport</th>
+    <th>Opponent</th>
+    <th>Where</th>
+    <th>Attending</th>
+  </thead>
+  <tbody>
+    <tr dir-paginate="game in upcomingObj.games | orderBy: 'date' | itemsPerPage: 3" pagination-id="myUpcomingGames" class="clickable" ng-click="showGame(game);">
+      <td colspan="2">{{game.date | date : "EEE M/d 'at' h:mm a"}}</td>
+      <td>{{game.Sport}}</td>
+      <td>{{game.Opponent}}</td>
+      <td>{{game.Location}}</td>
+      <td>{{game.Attending}}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="loader-inner ball-clip-rotate" ng-hide="upcomingObj.games"><div></div></div>
+<h6 ng-show="upcomingObj.games.length == 0" class="center">{{currentUser.get("house")}} has no games this week.</h6>
+<div class="center">
+  <dir-pagination-controls pagination-id="myUpcomingGames" ng-show="upcomingObj.games"></dir-pagination-controls>
+</div>
+<div ui-view="modal"></div>

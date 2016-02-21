@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Cabot Cafe</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="libs/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="libs/html5-boilerplate/dist/css/main.css">
+  
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet/less" href="libs/bootstrap/css/bootstrap.less">
+  <link rel="stylesheet" href="libs/multi_select/multi_select.css">
+  
+  <script src="spotifyCurrentlyPlaying.js/dist/spotifyCurrentlyPlaying.js"></script>
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <script src="libs/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="navbar.js"></script>
+  <link rel="stylesheet" href="libs/loaders.css/loaders.css">
+  <link rel="stylesheet/less" href="app.less">
+  <link rel="stylesheet/less" href="libs/angular-datepicker/dist/index.less">
+  <link rel="stylesheet/less" href="libs/editable/css/xeditable.less" >
+  <script src="libs/less.min.js"></script>
+  <script src="libs/parse.js"></script>
+  <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+  
+</head>
+<body ng-controller="MainCtrl as main" class="ng-cloak">
+  
+<div class="container" id="mainContainer">
+  <div ui-view></div>
+</div>
+    
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+  <script src="libs/d3-tip/index.js"></script>
+  <script src="standingsvis.js"></script>
+  <script src="libs/angular/angular.js"></script>
+  <script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="libs/angular-route/angular-route.js"></script>
+  <script src="libs/multi_select/multi_select.js"></script>
+  <script src="app_ang.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/leagues.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/browse.js"></script>
+  <script src="js/events.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+  <script src="js/dirPagination.js"></script>
+  <!-- Google maps -->
+  <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+  <script src="libs/lodash/lodash.min.js"></script>
+  <script src="libs/angular-google-maps/dist/angular-google-maps.min.js"></script>
+  <script src="libs/ui-bootstrap.js"></script>
+  <script src="libs/angular-datepicker/dist/index.js"></script>
+  <!-- editable -->
+  <script src="libs/editable/js/xeditable.js"></script>
+  <script src="components/specials/specials.js"></script>
+  <script src="components/music/music.js"></script>
+  <script src="components/menu/menu.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+</body>
+</html>

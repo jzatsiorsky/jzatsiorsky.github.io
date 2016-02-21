@@ -1,0 +1,15 @@
+<h3>Order Online</h3>
+<dir-pagination-controls></dir-pagination-controls>
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Price</th>
+  </thead>
+  <tbody>
+    <tr dir-paginate="item in ctrl.menu | orderBy: 'name' | itemsPerPage: 2">
+      <td>{{item.name}}</td>
+      <td>${{item.price}}</td>
+    </tr>
+  </tbody>
+
+</table>

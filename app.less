@@ -1,0 +1,211 @@
+// Harvard
+
+@bg-secondary: #c0392b;
+@bg: gold;
+
+
+
+@bg2: #7f8c8d;
+@bg3: #ecf0f1;
+@primary: white;
+@secondary: white;
+@text: black;
+
+// goes against bg colors
+@text2: white;
+
+@font: lato;
+@font-url: "fonts/lato/Lato-Regular.ttf";
+
+@font-face {
+    font-family: Broadway;
+    src: url("fonts/Broadway Bold.ttf");
+}
+
+@font-face {
+    font-family: Ritz;
+    src: url("fonts/RitzFLF-Italic.ttf");
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Broadway';
+  text-align: center;
+}
+
+h1, h3, h5 {
+  color: maroon;
+}
+
+h5 {
+  font-family: 'Ritz';
+  text-align: center;
+}
+
+h2 {
+  color:black;
+}
+
+a {
+  color: inherit;
+}
+
+body {
+  background-image: url("https://cabcaf.files.wordpress.com/2015/12/maeva-cafe-cover-photo.jpg?w=1200");
+  background-repeat: cover;
+
+}
+
+#mainContainer {
+  margin-top: 10px;
+  margin-bottom: 50px;
+  padding-top:10px;
+  background-color:lightgray;
+  border-radius: 10px;
+  min-height:650px;
+}
+
+img, iframe {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/*DEFAULT STYLES FOR DISPLAY*/
+*,*:before,*:after{
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	font-size:100%;
+	margin:0;
+	padding:0;
+}
+.cover{
+	width:100%;
+	height:100%;
+	background:#3dc0f1;
+}
+.icon{
+	position:absolute;
+	top:125px;
+	left:0;
+	right:0;
+	bottom:0;
+	display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/*THE ARTIFAKT ;) */
+.speaker{
+	width:0; 
+	height:0;
+	background:none;
+	border-top:4em solid transparent;
+	border-bottom:4em solid transparent; 
+	border-right:5em solid #fff;
+	
+}
+.speaker:before{
+	content:"";
+	position:absolute;
+	top:-1.3em;
+	left:0;
+	width:5.8em;
+	height:2.5em;
+	background:#fff;
+	border-radius:3px 1.5em 1.5em 3px;
+}
+.speaker:after{
+	content:"";
+	position:absolute;
+	border-right:0.5em solid #fff;
+	border-radius:50%;
+	/*animation*/
+	-webkit-animation:pump 0.2s 0.2s infinite alternate;
+	   -moz-animation:pump 0.2s 0.2s infinite alternate;
+	    -ms-animation:pump 0.2s 0.2s infinite alternate;
+	     -o-animation:pump 0.2s 0.2s infinite alternate;
+	        animation:pump 0.2s 0.2s infinite alternate;
+}
+@-webkit-keyframes pump {
+    from{
+    	top:-1.4em;
+		right:-7em;
+		width:2.5em;
+		height:2.5em;
+	}
+    to{
+    	top:-1.8em;
+		right:-8em;
+		width:3.5em;
+		height:3.5em;
+    }
+}
+@-moz-keyframes pump {
+    from{
+    	top:-1.4em;
+		right:-7em;
+		width:2.5em;
+		height:2.5em;
+	}
+    to{
+    	top:-1.8em;
+		right:-8em;
+		width:3.5em;
+		height:3.5em;
+    }
+}
+@-ms-keyframes pump {
+    from{
+    	top:-1.4em;
+		right:-7em;
+		width:2.5em;
+		height:2.5em;
+	}
+    to{
+    	top:-1.8em;
+		right:-8em;
+		width:3.5em;
+		height:3.5em;
+    }
+}
+@-o-keyframes pump {
+    from{
+    	top:-1.4em;
+		right:-7em;
+		width:2.5em;
+		height:2.5em;
+	}
+    to{
+    	top:-1.8em;
+		right:-8em;
+		width:3.5em;
+		height:3.5em;
+    }
+}
+@keyframes pump {
+	from{
+    	top:-1.4em;
+		right:-7em;
+		width:2.5em;
+		height:2.5em;
+	}
+    to{
+    	top:-1.8em;
+		right:-8em;
+		width:3.5em;
+		height:3.5em;
+    }
+}
+
+.ng-cloak {
+  display:none !important;
+}
+
+#live-title {
+  font-family: 'Ritz';
+  font-size: 48px;
+  color:black;
+  margin-top:0;
+}
+

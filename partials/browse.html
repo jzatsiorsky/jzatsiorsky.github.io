@@ -1,0 +1,27 @@
+<ul class="nav nav-pills nav-justified" id="sportNav">
+  <li role="presentation" ng-class="{active: selected == 'games'}">
+    <a href="" ng-click="setSelected('games')">Games</a>
+  </li>
+  <li role="presentation" ng-class="{active: selected == 'results'}">
+    <a href="" ng-click="setSelected('results')">Results</a>
+  </li>
+</ul>
+
+<div class="col-md-12 box tall">
+  <all-games ng-show="selected == 'games'" 
+             header="'Browse All Games'"
+             is-results="false"
+             teams="settings.teams"
+             locations="settings.locations"
+             admin="false"
+             id="'games'"
+             ></all-games>
+  <all-games ng-show="selected == 'results'" 
+             header="'Browse All Results'"
+             is-results="true"
+             teams="settings.teams"
+             locations="settings.locations"
+             admin="false"
+             id="'results'"
+             ></all-games>
+</div>

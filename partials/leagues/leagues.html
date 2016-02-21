@@ -1,0 +1,64 @@
+<ul class="nav nav-pills nav-justified" id="sportNav">
+  <li role="presentation" ng-repeat="sport in inSeason" ng-class="{active: sport == selected}">
+    <a href="" ng-click="updateSport(sport)">{{sport}}</a>
+  </li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+      More <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li ng-repeat="sport in outOfSeason">
+        <a href="" ng-click="updateSport(sport)">{{sport}}</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12 box left">
+    <div class="header">
+      <h5 class="center inline">Upcoming Games</h5>
+    </div>
+      <table class="table table-bordered noBottomMargin fixedHeight" ng-show="(games | filter: {Sport: selected}).length > 0">
+        <thead>
+          <th>When</th>
+          <th>Opponent</th>
+          <th>Where</th>
+          <th>Attending</th>
+        </thead>
+        <tbody>
+          <tr dir-paginate="game in games | filter: {Sport: selected} | orderBy: 'date' | itemsPerPage: 3" pagination-id="upcoming" class="clickable" ng-click="showGame(game);">
+            <td>{{game.date | date : "EEE M/d 'at' h:mm a"}}</td>
+            <td>{{game.Opponent}}</td>
+            <td>{{game.Location}}</td>
+            <td>{{game.Attending}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="center">
+        <dir-pagination-controls pagination-id="upcoming" ng-show="games"></dir-pagination-controls>
+      </div>
+      
+      <h6 ng-show="(games | filter: {Sport: selected}).length == 0" class="center">No upcoming {{selected}} games.</h6>
+      <div class="loader-inner ball-clip-rotate" ng-hide="games"><div></div></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-7 box right">
+    <results></results>
+  </div>
+  <div class="col-md-5 box left">
+    <announcements init="selected"></announcements>
+  </div>
+  <!-- Hiding standings visualization during beta
+  <div class="col-md-7 box right">
+    <standings init="selected" title="'Standings'"></standings>
+  </div>
+-->
+</div>
+
+
+<ng-include src="'partials/modalgame.html'">
+</ng-include>
+
+

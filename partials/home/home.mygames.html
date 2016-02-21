@@ -1,0 +1,34 @@
+<!-- Displays user's games on home page-->
+<div class="header">
+  <h5 class="center inline">My Games</h5>
+</div>
+<table class="table table-bordered fixedHeight noBottomMargin" ng-show="myGamesObj.games.length > 0">
+  <thead>
+    <th colspan="2">When</th>
+    <th>Sport</th>
+    <th>Opponent</th>
+    <th>Where</th>
+  </thead>
+  <tbody>
+    <tr dir-paginate="game in myGamesObj.games | orderBy: 'date' | itemsPerPage: 3" class="clickable" pagination-id="myGames" ng-click="showGame(game)">
+      <td colspan="2">{{game.date | date : "EEE M/d 'at' h:mm a"}}</td>
+      <td>{{game.Sport}}</td>
+      <td>{{game.Opponent}}</td>
+      <td>{{game.Location}}</td>
+    </tr>
+    
+  </tbody>
+</table>
+<div class="center">
+  <dir-pagination-controls pagination-id="myGames" ng-show="myGamesObj.games"></dir-pagination-controls>
+</div>
+<!--
+<div class="center">
+  <span ng-click="clearMyGames()" class="pointer" id="clearGames" ng-show="myGamesObj.games.length > 0">Clear games</span>
+</div>
+-->
+
+
+    
+<h6 ng-show="myGamesObj.games.length == 0" class="center">You aren't signed up for any games. Start <a ui-sref="leagues">here!</a></h6>
+<div class="loader-inner ball-clip-rotate" ng-hide="myGamesObj.games"><div></div></div>
