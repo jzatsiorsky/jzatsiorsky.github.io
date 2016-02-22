@@ -51,7 +51,7 @@ module.directive('music', [function() {
       this.initialize = function() {
         var that = this;
         
-        this.lastfm_url ='http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=zatsiorsky&api_key=abda6dd3690d6390af3a31c97eaf36b3&format=json';
+        this.lastfm_url ='http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=cabotcafe&api_key=abda6dd3690d6390af3a31c97eaf36b3&format=json';
         
         this.tweenTime = 2000;
         
