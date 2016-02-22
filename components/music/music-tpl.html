@@ -1,5 +1,7 @@
+
 <div class="row">
-  <div class="col-md-4 col-md-push-4">
+
+<div class="col-md-4 col-md-push-4">
   <div class="row">
     <a href="http://cabotcafe.com/" target="_blank">
       <img src="images/cafelogo.png" style="height:100px">
@@ -7,33 +9,63 @@
     <h1 id="live-title">LIVE!</h1>
   </div>
   <div class="row">
-    <h3>Recently Played</h3>
-    <div ng-repeat="track in ctrl.otherTracks | unique:'pic_id' | limitTo: 9">
+    <h3 style="margin-top: 2px">Recently Played</h3>
+    <div ng-repeat="track in ctrl.otherTracks | unique:'pic_id' | limitTo: 6">
     <div class="col-xs-4" style="margin-bottom: 10px">
       <a href="{{track.url}}" target="_blank" title="{{track.name}} by {{track.artist['#text']}}">
-        <img src='{{track.image[2]["#text"]}}' style="width: 100%">
+        <img ng-src='{{track.image[2]["#text"]}}' style="width: 100%">
       </a>
       
     </div>
+    </div>
+    </div>
+    <div class="row" style="min-height: 245px">
+    <h3 style="margin-top:2px">Suggest a Song</h3>
+    <form class="form-inline" style="text-align:center">
+      <input type="text" class="form-control" placeholder="Track" ng-model="ctrl.tSearch" ng-change="ctrl.searchForTracks()" ng-init="ctrl.tSearch = ''" style="max-width:80%; display:inline; text-align:center">
+    <input type="text" class="form-control" placeholder="Artist (optional)" ng-model="ctrl.artSearch" ng-change="ctrl.searchForTracks()" ng-init="ctrl.artSearch = ''" style="max-width:80%; display:inline; text-align:center">
+    </form>
+    
+    <h4 ng-show="ctrl.submitted">Thanks for suggesting {{ctrl.suggestedTrack.name}} by {{ctrl.suggestedTrack.artists[0].name}} to the Cafe's playlist!</h4>
+    
+
+    <table class="table">
+      <tr ng-repeat="track in ctrl.searchTracks | limitTo: 2 | unique:'identifier'"> 
+        <td>
+          <img ng-src='{{track.album.images[track.album.images.length - 1].url}}' style="height:40px">
+        </td>
+        <td>
+          <p>{{ track.name | limitTo: 16 }}{{ track.name.length > 16 ? '...' : ''}}</p>
+        </td>
+        <td>
+          <p>{{track.artists[0].name | limitTo: 16}}{{ track.artists[0].name.length > 16 ? '...' : ''}}</p>
+        </td>
+        <td>
+          <button class="btn btn-success" ng-click="ctrl.suggestTrack(track)">Suggest it!</button>
+        </td>
+      </tr>
+    </table>
   </div>
   </div>
-</div>
 <div class="col-md-4 col-md-pull-4">
   <div class="row">
-    <h3 ng-show="ctrl.currentlyPlaying && ctrl.track" class="ng-cloak">Now Playing</h3>
-    <h3 ng-hide="ctrl.currentlyPlaying && ctrl.track" class="ng-cloak">Last Played</h3>
-    <span class="icon speaker" ng-show="ctrl.currentlyPlaying"></span>
-    <img src='{{ctrl.track_s.album.images[1].url}}' style="width:250px">
+    <div class="col-md-12">
+      <h3 ng-show="ctrl.currentlyPlaying && ctrl.track" class="ng-cloak">Now Playing</h3>
+      <h3 ng-hide="ctrl.currentlyPlaying && ctrl.track" class="ng-cloak">Last Played</h3>
+      <span class="icon speaker" ng-show="ctrl.currentlyPlaying"></span>
+      <img ng-src='{{ctrl.track_s.album.images[1].url}}' style="width:250px">
+
+      <h3>{{ctrl.track.name}}</h3>
+      <div class="row">
+        <iframe ng-src="{{ctrl.follow_url}}" width="250" height="60" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+    </div>
+
+      <div class="row">
+      <h3>More from {{ctrl.track_s.album.name}}</h3>
+      <iframe ng-src="{{ctrl.widget_url}}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+    </div>
+  </div>
     
-    <h3><b>{{ctrl.track.name}}</b></h3>
-    <div class="row">
-      <iframe ng-src="{{ctrl.follow_url}}" width="250" height="60" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
-  </div>
-   
-    <div class="row">
-    <h3>More from {{ctrl.track.album["#text"]}}</h3>
-    <iframe ng-src="{{ctrl.widget_url}}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
-  </div>
    
   </div>
 </div>
@@ -45,38 +77,14 @@
     <h4>{{ctrl.aow.artists[0].name}}</h4>
     <iframe ng-src="{{ctrl.aow_url}}" width="300" height="400" frameborder="0" allowtransparency="true"></iframe>
   </div>
-<!--
-    <div class="row" style="min-height: 250px">
-    <h3>Suggest a Song</h3>
-    <form class="form-inline" style="text-align:center">
-      <input type="text" class="form-control" placeholder="Track" ng-model="ctrl.tSearch" ng-change="ctrl.searchForTracks()" ng-init="ctrl.tSearch = ''" style="max-width:80%; display:inline; text-align:center">
-    <input type="text" class="form-control" placeholder="Artist (optional)" ng-model="ctrl.artSearch" ng-change="ctrl.searchForTracks()" ng-init="ctrl.artSearch = ''" style="max-width:80%; display:inline; text-align:center">
-    </form>
-    
-    <h4 ng-show="ctrl.submitted">Thanks for suggesting {{ctrl.suggestedTrack.name}} by {{ctrl.suggestedTrack.artists[0].name}}!</h4>
-    
-
-    <table class="table">
-      <tr ng-repeat="track in ctrl.searchTracks | limitTo: 2 | unique:'identifier'"> 
-        <td>
-          <img src='{{track.album.images[track.album.images.length - 1].url}}' style="height:40px">
-        </td>
-        <td>
-          <p>{{ track.name | limitTo: 12 }}{{ track.name.length > 12 ? '...' : ''}}</p>
-        </td>
-        <td>
-          <p>{{track.artists[0].name | limitTo: 12}}{{ track.artists[0].name.length > 12 ? '...' : ''}}</p>
-        </td>
-        <td>
-          <button class="btn btn-success" ng-click="ctrl.suggestTrack(track)">Suggest it!</button>
-        </td>
-      </tr>
-    </table>
-  </div>
--->
-
+</div>
   
 </div>
+<div class="row">
+  <div class="col-md-12">
+    <p style="font-size: 12px">Created for Cabot Cafe by James Zatsiorsky.</p>
+  </div>
 </div>
+
 
 

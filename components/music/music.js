@@ -15,7 +15,6 @@ module.directive('music', [function() {
         var that = this;
         $http.get("https://api.spotify.com/v1/albums/" + id).success(function(album) {
           that.aow = album;
-          console.log(album);
         });
         
       }
@@ -43,15 +42,16 @@ module.directive('music', [function() {
           
             that.otherTracks = that.otherTracks.slice(1);
           
-            spotify_request_url = encodeURIComponent(that.track.name + " " + that.track.artist["#text"] + " " + that.track.album["#text"]);
+            spotify_request_url = encodeURI(that.track.name + " " + that.track.artist["#text"] + " " + that.track.album["#text"]);
             that.spotify(spotify_request_url);
+            
           });
       }
       
       this.initialize = function() {
         var that = this;
         
-        this.lastfm_url ='http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=cabotcafe&api_key=abda6dd3690d6390af3a31c97eaf36b3&format=json';
+        this.lastfm_url ='http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=zatsiorsky&api_key=abda6dd3690d6390af3a31c97eaf36b3&format=json';
         
         this.tweenTime = 2000;
         
@@ -72,17 +72,40 @@ module.directive('music', [function() {
       this.initialize();
       
       this.spotify = function(spotify_request_url) {
+        console.log(spotify_request_url);
         var that = this;
+        spotify_request_url = spotify_request_url.replace(":", "");
         $http.get("https://api.spotify.com/v1/search?q=" + spotify_request_url + "&type=track").success(function(spotify_track) {
-            that.track_s = spotify_track.tracks.items[0];
-            var url = "https://embed.spotify.com/?uri=spotify%3Aalbum%3a" + that.track_s.album.id + "&theme=white&view=coverart";
-            var follow_url = "https://embed.spotify.com/follow/1/?uri=spotify:artist:" + that.track_s.artists[0].id + "&size=detail&theme=light";
-            
-            that.widget_url = $sce.trustAsResourceUrl(url);
-            that.follow_url = $sce.trustAsResourceUrl(follow_url);
-            
-          });
+          var track = spotify_track;
+          // Check whether items is empty - this is a backup in case there is an album issue
+          if (track.tracks.items.length == 0) {
+            spotify_request_url = encodeURI(that.track.name + " " + that.track.artist["#text"]);
+            spotify_request_url = spotify_request_url.replace(":", "");
+            $http.get("https://api.spotify.com/v1/search?q=" + spotify_request_url + "&type=track").success(function(t) {
+              track = t;
+              that.spotifyURLs(track);
+            });
+          }
+          else {    
+            that.spotifyURLs(track);
+          }
+          
+      });
       }
+      
+      this.spotifyURLs = function(track) {
+          var that = this;
+          that.track_s = track.tracks.items[0];
+          var url = "https://embed.spotify.com/?uri=spotify%3Aalbum%3a" + that.track_s.album.id + "&theme=white&view=coverart";
+          var follow_url = "https://embed.spotify.com/follow/1/?uri=spotify:artist:" + that.track_s.artists[0].id + "&size=detail&theme=light";
+
+          that.widget_url = $sce.trustAsResourceUrl(url);
+          that.follow_url = $sce.trustAsResourceUrl(follow_url);
+            
+      }
+      
+      
+      
       
       $interval(function() {
         that.getFM();
@@ -117,7 +140,10 @@ module.directive('music', [function() {
       
       
       this.suggestTrack = function(track) {
-//        $http.post("/suggest", {track: track});
+        var email = "music@cabotcafe.com";
+        var openLink = "https://open.spotify.com/track/" + track.id;
+        var message = "Someone just suggested that we add " + track.name + " by " + track.artists[0].name + " to our playlist. The link to open this song in Spotify is: " + openLink;
+        $http.post("//formspree.io/" + email, {message: message });
         
         this.suggestedTrack = track;
         this.suggested.unshift(track);
