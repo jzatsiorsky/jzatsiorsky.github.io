@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-6">
+    <a href="http://cabotcafe.com/" target="_blank">
+      <img src="images/cafelogo.png" style="height:100px">
+    </a>
+    <h1 id="live-title">EXPLORE</h1>
+    <h4><a href="#/live" class="header-link">Go to <span style="font-family: Ritz">LIVE!</span></a></h4>
+  </div>
+  <div class="col-md-6">
+  <div class="tab-content">
+    <ul class="nav nav-pills">
+      <li role="presentation" ng-class="{active: venue.id == ctrl.venue.id}" ng-repeat="venue in ctrl.venues" ng-click="ctrl.venueClick(venue)"><a href="">{{venue.name}}</a></li>
+    </ul>
+  </div>
+  
+  <ui-gmap-google-map center='ctrl.map.center' zoom='ctrl.map.zoom' pan="true">
+    <ui-gmap-markers models="ctrl.venues" coords="'location'" icon="'icon'" click="ctrl.markerClicked">
+  </ui-gmap-google-map>
+  
+    </div>
+    
+</div>
+
+  
+<div class="row">
+
+  <div class="col-md-6">
+    <div style="min-height:360px">
+      <h3>Browsing Concerts at {{ctrl.venue.name}}</h3>
+    <div class="tab-content">
+      <ul class="nav nav-pills nav-stacked">
+        <li role="concerts" ng-class="{active: concert.title == ctrl.selected.concert.title}" dir-paginate="concert in ctrl.concerts | itemsPerPage: 8" ng-click="ctrl.select(concert)" style="text-align:center"><a href="">{{concert.title}} on {{concert.datetime_local | date: 'EEEE, M/d'}}</a></li>
+      </ul>
+    </div>
+    </div>
+    
+    <dir-pagination-controls></dir-pagination-controls>
+
+
+  </div>
+  
+  <div class="col-md-6">
+    <h3 ng-show="ctrl.selected.concert == null">Click a concert to start exploring!</h3>
+    <h3>{{ctrl.selected.concert.title}}</h3>
+    <h4>{{ctrl.selected.concert.datetime_local | date: "EEEE, M/d"}}</h4>
+    <h4 ng-show="ctrl.selected.concert != null">Show starts at {{ctrl.selected.concert.datetime_local | date: "shortTime"}}</h4>
+
+
+
+    <h5><a href="{{ctrl.selected.concert.url}}" ng-show="ctrl.selected.concert" target="_blank">Check for tickets on SeatGeek</a></h5>
+    <iframe ng-repeat="url in ctrl.selected.iframe_url" ng-src="{{url}}" frameborder="0" allowtransparency="true" height="100"></iframe>
+  </div>
+</div>

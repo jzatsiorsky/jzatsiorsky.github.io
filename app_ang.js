@@ -11,7 +11,8 @@ angular.module('myApp', [
   'xeditable',
   'specials',
   'music',
-  'menu'
+  'menu',
+  'explore'
 ])
 // Set theme for x-editable
 .run(function($rootScope, $state, editableOptions) {
@@ -19,13 +20,17 @@ angular.module('myApp', [
 })
 .config(function($stateProvider, $urlRouterProvider, paginationTemplateProvider) {
   paginationTemplateProvider.setPath('partials/dirPagination.tpl.html');
-  $urlRouterProvider.otherwise("/home");
+  $urlRouterProvider.otherwise("/live");
   $stateProvider
-  .state('home',{
-      url: '/home',
+  .state('live',{
+      url: '/live',
       templateUrl: 'partials/home/home.html',
       controller: 'HomeCtrl',
-  });
+  })
+  .state('explore',{
+    url: '/explore',
+    templateUrl: 'components/explore/explore.html'
+  })
 })
 .controller('MainCtrl', function($rootScope, $scope, $location, $state, $timeout) {
 });
